@@ -190,14 +190,18 @@ const apiUrl = 'https://emailpwned-api.vercel.app/v1/metrics/';
 
 $.ajax(apiUrl)
     .done(function (response) {
-        let pastesCount = parseInt(response.Pastes_Count.replace(/,/g, ''), 10);
         let breachesCount = parseInt(response.Breaches_Count, 10);
         let breachesRecords = parseInt(response.Breaches_Records, 10);
+        
+        // Handle Pastes_Count by replacing commas and parsing as integer
+        let pastesCount = parseInt(response.Pastes_Count.replace(/,/g, ''), 10);
+        let pastesRecords = parseInt(response.Pastes_Records, 10);
 
         // Run counters for each metric with formatted output
         runCounter('#breaches-count', breachesCount);
         runCounter('#breaches-records', breachesRecords);
         runCounter('#pastes-count', pastesCount);
+        runCounter('#pastes-records', pastesRecords);
     });
 
 // Function to format numbers
